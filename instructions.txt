@@ -1,0 +1,9 @@
+PARA QUE TIRE LA CONEXION GITHUB-JENKINS AUTOMÁTICAMENTE:
+- Abrir bash en la carpeta de ngrok
+- ejecutar comando: ./ngrok http 80
+- Ir a: http://localhost:4040/status
+- pillar url y meterlo como webhook en github
+
+PARA QUE TIRE LA CONEXION JENKINS-AZURE
+- Seguir tutorial:
+	https://docs.microsoft.com/en-us/azure/jenkins/execute-cli-jenkins-pipeline#add-azure-service-principal-to-jenkins-credential
