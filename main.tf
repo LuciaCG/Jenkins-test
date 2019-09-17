@@ -1,14 +1,10 @@
-/*module "mymodule" {
-    source = "./mymodule"
-}*/
-
 # Resource Group Creation
 resource "azurerm_resource_group" "resource_gp" {
     name        = "Test-Terraform"
     location    = "westeurope"
 
     tags = {
-        Owner = "Lucia Carrion"
+        Owner = "Raymon Redington"
     }
 }
 
@@ -78,6 +74,6 @@ resource "azurerm_virtual_machine" "main" {
     disable_password_authentication = false
   }
   tags = {
-    Owner = "Lucia Carrion"
+    Owner = "Raymon Redington"
   }
 }
