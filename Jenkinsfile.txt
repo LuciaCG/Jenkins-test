@@ -2,21 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo 'Building..'
+                checkout scm
             }
         }
-        stage('Test') {
+
+        stage('TF Plan') {
             steps {
-                echo 'Testing..'
+                sh 'terraform init'
+                sh 'terraform plan'
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+
+
     }
 }
 
