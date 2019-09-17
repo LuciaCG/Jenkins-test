@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Create Folder in Ubutu') {
             steps {
-                echo 'Building..'
+                sh 'ansible-playbook main.yaml'
             }
         }
         stage('Test') {
