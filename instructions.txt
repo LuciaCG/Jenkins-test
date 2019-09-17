@@ -7,3 +7,10 @@ PARA QUE TIRE LA CONEXION GITHUB-JENKINS AUTOMÁTICAMENTE:
 PARA QUE TIRE LA CONEXION JENKINS-AZURE
 - Seguir tutorial:
 	https://docs.microsoft.com/en-us/azure/jenkins/execute-cli-jenkins-pipeline#add-azure-service-principal-to-jenkins-credential
+
+SOBRE EL JENKINSFILE
+- TF Plan -> hace el terraform plan
+- Approval -> espera a que digamos que queremos proceder, teniendo así una oportunidad de ver el plan
+- TF Apply -> hace el terraform apply del plan
+
+-> Se han creado todas las infraestructuras <-
