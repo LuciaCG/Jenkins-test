@@ -37,7 +37,9 @@ INSTRUCCIONES
 		te crea la VM en Azure
 	- Terraform destroy
 		te destruye todo lo que se ha creado
-- La gracia es que no se pongan datos sensibles (contraseñas a VMs, por ejemplo) en el código que después irá en Github. Esto se consigue poniendo en Azure un archivo .tfvars que de ahí se lean contraseñas y cosas así. Mientras se está haciendo así, local, podemos tener el archivo este en nuestro pc mismamente
+- La gracia es que no se pongan datos sensibles (contraseñas a VMs, por ejemplo) en el código que después irá en Github. Esto se
+consigue poniendo en Azure un archivo .tfvars que de ahí se lean contraseñas y cosas así. Mientras se está haciendo así, local, 
+podemos tener el archivo este en nuestro pc mismamente
 
 - Quita el Jenkinsfile
 - En Jenkins haz un FreeProject en vez de un Pipeline
@@ -54,6 +56,8 @@ INSTRUCCIONES
 - Haz un pipeline e incluye el Jenkins file
 	-> Aviso que, como no tenemos permisos, a partir de aquí no va a tirar.
 	-> No hiperventiles, es normal
+	-> Jenkinsfile primero dirá que terraform haga unas cosas (cree la infraestructura) y 
+		que ansible hage después otras (configure esa infraestructura)
 	-> Sobre el jenkins file:
 		- TF Plan -> hace el terraform plan
 		- Approval -> espera a que digamos que queremos proceder, teniendo así una oportunidad de ver el plan
