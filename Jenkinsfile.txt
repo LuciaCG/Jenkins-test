@@ -1,20 +1,26 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
+    try {
+
+        stages {
+            stage('Checkout') {
+                steps {
+                    checkout scm
+                }
+            }
+
+            stage('TF Plan') {
+                steps {
+                    sh 'terraform init'
+                    sh 'terraform plan'
+                }
             }
         }
-
-        stage('TF Plan') {
-            steps {
-                sh 'terraform init'
-                sh 'terraform plan'
-            }
-        }
-
+    }
+    catch (err) {
+        throw err
+    }
 
     }
 }
