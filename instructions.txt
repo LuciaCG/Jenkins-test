@@ -41,6 +41,9 @@ INSTRUCCIONES
 
 - Quita el Jenkinsfile
 - En Jenkins haz un FreeProject en vez de un Pipeline
+- Si Jenkins es cabezota y no te pilla el repositorio de hithub, create una SSHkey en tu ordenador. 
+	- La publica va en github -> Settings->SSH andGPG Keys
+	- La privada va en Jenkins -> Credentials->System->Global Credentials->Add Credential (del tipo SSH with private key)
 - Ahora intentamos que github y jenkins tiren:
 	- Abrir bash en la carpeta de ngrok
 	- ejecutar comando: ./ngrok http 80
