@@ -35,7 +35,4 @@ pipeline {
     catch (err) {
         throw err
     }
-
-    }
 }
-
