@@ -1,3 +1,14 @@
+SOBRE EL PIPELINE COMPLETO:
+Terraform se usa para crear la infraestructura como código en azure 
+(o cualquier otro proveedor) y ansible se usa para configurar esa 
+infraestructura e instalarle software en caso de que sea necesario. 
+Después, si se sube el código a Github (o cualquier otro repositorio) 
+se puede configurar de forma que avise a Jenkins cada vez que se haga 
+“push” y entonces Jenkins, según las especificaciones que lea en el 
+jenkinsfile que se haya subido a Github, vuelve a correr todo (o lo 
+que ponga en ese jenkinsfile), actualizando lo que se haya creado en, 
+por ejemplo, Azure.
+
 PRERREQUISITOS
 - Descarga Jenkins
 - Descarga Terraform
@@ -10,42 +21,43 @@ PRERREQUISITOS
 		- Terraform
 - Descarga ngrok
 
-RECOMENDACIONES
+INSTRUCCIONES
 - Descargate los archivos de mi GitHub
 - Hazte un proyecto en tu GitHub y sube los archivos que te has descargado de mi GitHub
 - Primero haz que funcione Terraform con Azure
 - Entiende lo que está haciendo Terraform
+- En la consola de Visual Code pon:
+	- az login 
+		esto te loggeará en tu sesión de Azure
+	- Terraform init
+		se descarga los plugins necesarios
+	- Terraform plan
+		te hace el plan de las cosas que va a hacer en Azure, si no hay nada raro, pasamos a lo siguiente
+	- Terraform apply
+		te crea la VM en Azure
+	- Terraform destroy
+		te destruye todo lo que se ha creado
 
 - Quita el Jenkinsfile
 - En Jenkins haz un FreeProject en vez de un Pipeline
-- Cuando consigas que GitHub-Jenkins funcione, entonces haz un pipeline e incluye el Jenkins file
+- Ahora intentamos que github y jenkins tiren:
+	- Abrir bash en la carpeta de ngrok
+	- ejecutar comando: ./ngrok http 80
+	- Ir a: http://localhost:4040/status
+	- pillar UN url y meterlo como webhook en github
+	- Ahora cada vez que hagas push, jenkins se actualiza automáticamente
+
+- Haz un pipeline e incluye el Jenkins file
 	-> Aviso que, como no tenemos permisos, a partir de aquí no va a tirar.
 	-> No hiperventiles, es normal
-
-PARA QUE TIRE LA CONEXION GITHUB-JENKINS AUTOMÁTICAMENTE:
-- Abrir bash en la carpeta de ngrok
-- ejecutar comando: ./ngrok http 80
-- Ir a: http://localhost:4040/status
-- pillar url y meterlo como webhook en github
+	-> Sobre el jenkins file:
+		- TF Plan -> hace el terraform plan
+		- Approval -> espera a que digamos que queremos proceder, teniendo así una oportunidad de ver el plan
+		- TF Apply -> hace el terraform apply del plan
 
 PARA QUE TIRE LA CONEXION JENKINS-AZURE
 - Seguir tutorial:
 	https://docs.microsoft.com/en-us/azure/jenkins/execute-cli-jenkins-pipeline#add-azure-service-principal-to-jenkins-credential
 
-SOBRE EL PIPELINE COMPLETO:
-Terraform se usa para crear la infraestructura como código en azure 
-(o cualquier otro proveedor) y ansible se usa para configurar esa 
-infraestructura e instalarle software en caso de que sea necesario. 
-Después, si se sube el código a Github (o cualquier otro repositorio) 
-se puede configurar de forma que avise a Jenkins cada vez que se haga 
-“push” y entonces Jenkins, según las especificaciones que lea en el 
-jenkinsfile que se haya subido a Github, vuelve a correr todo (o lo 
-que ponga en ese jenkinsfile), actualizando lo que se haya creado en, 
-por ejemplo, Azure.
-
-SOBRE EL JENKINSFILE
-- TF Plan -> hace el terraform plan
-- Approval -> espera a que digamos que queremos proceder, teniendo así una oportunidad de ver el plan
-- TF Apply -> hace el terraform apply del plan
-
--> Se han creado todas las infraestructuras <-
+Si tuviesemos los permisos necesarios para poder conectar azure con jenkins, el jenkinsfile se encargaría de correr
+terraform y se crearían las infraestructuras necearias. Ahora pasaríamos con el tema de Ansible!
